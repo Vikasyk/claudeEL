@@ -16,6 +16,7 @@ OpsGuard studies whether a Kubernetes agent can complete an operator’s task wh
 | November 12 | Verified by benchmark workstream | The selector benchmark recorded 56 scripted kind trials across 14 cases and four conditions, with no harness errors. | [Selector benchmark verification](BENCHMARK_RUNNER_AND_SELECTORS.md#part-2-run-on-a-live-kind-cluster) |
 | November 12 | Integrated on feature branch | The replay dashboard added restart, image update, ConfigMap, and selector records alongside scaling. The Run library now accepts inline JSONL records and result folders with trace files. | `feat/frontend-integration` · `d65a930` · [Presenter guide](PHASE_1_DEMO_GUIDE.md) |
 | November 12 | Verified on feature branch | The default suite passed 316 Python and 10 frontend tests. The validator checked 70 case definitions. Clean scale, restart, ConfigMap, and selector checks passed on kind. The image check passed in memory. The browser imported fresh scale and selector records. | [Testing guide and verification record](TESTING.md#verification-record-for-november-12-2026) |
+| November 12 | Integrated | All 70 cases from the five workstreams run under the four defence conditions through one schema, report and dashboard. Scripted memory run: attack success 50/50 with no defence and 0/50 with OpsGuard; all 20 clean tasks completed under OpsGuard. | [Cross-team matrix](CROSS_TEAM_MATRIX.md) |
 
 ## Phase 1 report summary
 

@@ -1,5 +1,7 @@
 # OPS-Guard
 
+> **Cross-team prototype:** `py -3 -m opsguard.integration.run_all --ablations` runs all 70 cases from the five workstreams under the four defence conditions; `py -3 -m opsguard.integration.demo` narrates one attack; open `frontend/results.html` for the results. See [the cross-team matrix guide](documentations/CROSS_TEAM_MATRIX.md).
+
 OpsGuard is a deterministic gate for an LLM-powered Kubernetes operations agent. The agent reads logs, alert annotations, runbooks and ConfigMaps as evidence, then proposes a typed Kubernetes action. OpsGuard checks that action against the operator's authorization, re-derives the intended target from live inventory, previews the write, and estimates its downstream effect. A separate oracle reads real cluster state to decide what actually happened.
 
 The repository also contains OpsGuard-Bench: 20 clean tasks and 50 attacked cases across four evidence channels, with runners that compare four defence conditions.
