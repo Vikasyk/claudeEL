@@ -59,3 +59,21 @@ The 10 incomplete attacked trials under OpsGuard are Vikas's ConfigMap cases. Hi
 ## How to read these numbers
 
 These numbers verify that every operation and evidence channel is wired through one gateway and scored by an independent oracle. They do not measure LLM behaviour. Following the team's runners, the scripted agent always submits the injected action first, so the no-defence baseline is 100% by construction. Hardened equals no defence because both receive identical scripted proposals. The scripted judge allows only the scripted legitimate action. Measuring real resistance needs the live-model matrix: 70 cases × 4 conditions × 2 models × 3 repeats.
+
+## Run the full experiment on your laptop
+
+The real-model and kind runs need network access to Groq and a local Docker/kind cluster. Both are available on the team laptops. Put the Groq key in `env.env` (git-ignored) as `GROQ_API_KEY=...`, then from the repository root:
+
+```powershell
+.\scripts\run_full_experiment.ps1 -Repeats 1 -Pilot   # about 64 real-model trials: check that models and quotas work
+.\scripts\run_full_experiment.ps1                     # 56 cases x 4 defences x 2 models x 3 repeats with real models
+.\scripts\run_full_experiment.ps1 -Kind               # adds selector, restart and ConfigMap with real models on kind
+```
+
+| Part | Cases | Backend | Models |
+| --- | --- | --- | --- |
+| 1 | scale, set_image, restart, set_selector (56) | memory fixtures | real (Groq) |
+| 2 (`-Kind`) | set_selector, restart, set_config | kind cluster | real (Groq) |
+| 2 (`-Kind`) | scale | kind cluster | scripted (its runner has no Groq mode) |
+
+Remaining gaps are named in the script: set_image has no kind runner, and the restart kind run needs Alertmanager on `127.0.0.1:9093` (see `TESTING.md`). Each step keeps its results and errors, and a failed step does not stop the others. Model IDs default to the ones Prapti piloted (`openai/gpt-oss-20b`, `openai/gpt-oss-120b`). Pass `-Models` and `-JudgeModel` to change them.
